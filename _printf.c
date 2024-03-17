@@ -31,9 +31,6 @@ int _printf(const char *format, ...)
 		if (!format[i])
 			return (contador);
 
-		if (!format[i + 1])
-			return (-1);
-
 		fun = tipo_valido(format[i + 1]);
 
 		if (fun != NULL)
@@ -41,6 +38,12 @@ int _printf(const char *format, ...)
 			contador += fun(parametro);
 			i += 2;
 		}
+		else
+		{
+
+		if (!format[i + 1])
+			return (-1);
+
 		if (format[i + 1] == '%')
 		{
 			_write(format[i + 1]);
@@ -49,6 +52,8 @@ int _printf(const char *format, ...)
 		}
 		else
 		i++;
+
+		}
 	}
 	va_end(parametro);
 	return (contador);
