@@ -30,6 +30,7 @@ int _printf(const char *format, ...)
 		if (!format[i])
 			return (contador);
 
+
 		fun = tipo_valido(format[i + 1]);
 		if (fun != NULL)
 		{

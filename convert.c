@@ -49,6 +49,11 @@ int convert_int(va_list c)
 	char *numeroChar;
 
 	numero = va_arg(c, int);
+	if (numero == 0)
+	{
+		_write('0');
+		return (1);
+	}
 
 	temp = numero < 0 ? -numero : numero;
 	contador = numero < 0 ? 1 : 0;
@@ -61,16 +66,13 @@ int convert_int(va_list c)
 
 	numeroChar = malloc((contador + 1) * sizeof(char));
 	if (numeroChar == NULL)
-	{
 		return (0);
-	}
+
 	numeroChar[contador] = '\0';
 	temp = numero < 0 ? -numero : numero;
 
 	if (numero < 0)
-	{
 		numeroChar[0] = '-';
-	}
 
 	for (i = contador - 1; temp != 0; i--)
 	{
