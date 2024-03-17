@@ -41,7 +41,7 @@ int _printf(const char *format, ...)
 		if (!format[i + 1])
 			return (-1);
 
-		_write(format[i + 1]);
+		_write(format[i]);
 		contador++;
 
 		if (format[i + 1] == '%')
