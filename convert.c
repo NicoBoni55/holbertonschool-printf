@@ -1,25 +1,17 @@
 #include "main.h"
-#include <stdarg.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
+
 /**
- * convstr - convert character to string
+ * convert_char - convert character to string
  * @c : character
  *
  * Return: string
  */
-char *convert_char(va_list c)
+int convert_char(va_list c)
 {
-	char stat[2];
-	char *s;
+	char s = va_arg(c, int);
 
-	stat[0] = va_arg(c, int);
-	stat[1] = '\0';
-	s = stat;
-
-	_write(stat[0]);
-	return (s);
+	_write(s);
+	return (1);
 }
 
 /**
@@ -29,20 +21,19 @@ char *convert_char(va_list c)
 *Return: string
 */
 
-char *convert_string(va_list c)
+int convert_string(va_list c)
 {
 	char *s = va_arg(c, char *);
+
 	int i;
 
-	if (s == NULL)
-	{
-		return (NULL);
-	}
+	s = s == NULL ? "null" : s;
+
 	for (i = 0; s[i]; i++)
 	{
 		_write(s[i]);
 	}
-	return (s);
+	return (i);
 }
 
 /**
@@ -52,7 +43,7 @@ char *convert_string(va_list c)
 *Return: retorna el int como tipo de dato string (char *)
 * -2,147,400,000 a 2,147,400,000
 */
-char *convert_int(va_list c)
+int convert_int(va_list c)
 {
 	int numero, temp, contador, i;
 	char *numeroChar;
@@ -71,11 +62,11 @@ char *convert_int(va_list c)
 	numeroChar = malloc((contador + 1) * sizeof(char));
 	if (numeroChar == NULL)
 	{
-		return (NULL);
+		return (0);
 	}
 	numeroChar[contador] = '\0';
 	temp = numero < 0 ? -numero : numero;
-	
+
 	if (numero < 0)
 	{
 		numeroChar[0] = '-';
@@ -87,9 +78,8 @@ char *convert_int(va_list c)
 		temp /= 10;
 	}
 
-	for (i = 0; numeroChar[i]; i++)
-	{
-		_write(numeroChar[i]);
-	}
-	return (numeroChar);
+	i = _stamp(numeroChar);
+
+	free(numeroChar);
+	return (i);
 }
