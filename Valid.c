@@ -8,14 +8,13 @@
 *Return: retorna la funcion para imprimir el dato;
 */
 
-char *(*tipo_valido(char tipoDato))(va_list) /* va_list tipo de dato que nececitamos par imprimir */
+char *(*tipo_valido(const char *tipoDato))(va_list) /* va_list tipo de dato que nececitamos par imprimir */
 {
 	TtiposValidos tipos[] = {
 		{"c", convert_char},
 		{"s", convert_string},
 		{"i", convert_int},
 		{"d", convert_int},
-		{"%", convert_parcent},
 		{NULL, NULL}
 	};
 
@@ -23,7 +22,7 @@ char *(*tipo_valido(char tipoDato))(va_list) /* va_list tipo de dato que nececit
 
 	for (i = 0; tipos[i].valido; i++) {
 
-		if (tipoDato == *tipos[i].valido) {
+		if (*tipoDato == *tipos[i].valido) {
 
 			return (tipos[i].funcion);
 		}

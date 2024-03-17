@@ -1,4 +1,5 @@
 #include "main.h"
+#include <unistd.h>
 /**
  * _strlen - returns the length of a string
  * @s: string
@@ -22,7 +23,7 @@ int _strlen(char *s)
  *
  * return: 1 is success
  */
-int _write(char *s)
+int _write(char s)
 {
-        return (write(1, s, _strlen(s)));
+	return (write(1, &s, 1));
 }

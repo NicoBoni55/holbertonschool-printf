@@ -14,16 +14,19 @@
 struct rep_tiposValidos
 {
 	char *valido;
-	char *(*funcion)();
+	char *(*funcion)(va_list);
 };
 
 typedef struct rep_tiposValidos TtiposValidos;
 
-int _printf(const char *format, ...);
+char *(*tipo_valido(const char *c))(va_list);
+int _strlen(char *s);
+int _write(char s);
 
 char *convert_char(va_list para);
 char *convert_string(va_list para);
 char *convert_int(va_list para);
-char *convert_parcent(void);
+
+int _printf(const char *format, ...);
 
 #endif /* MAIN_H */
