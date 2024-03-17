@@ -27,7 +27,7 @@ int convert_string(va_list c)
 
 	int i;
 
-	s = s == NULL ? "null" : s;
+	s = s == NULL ? "(null)" : s;
 
 	for (i = 0; s[i]; i++)
 	{
