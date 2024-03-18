@@ -1,5 +1,4 @@
 #include "main.h"
-#include <limits.h>
 #include <stdarg.h>
 
 /**
@@ -39,42 +38,50 @@ int convert_string(va_list c)
 }
 
 /**
+ *printINT - imprime un numero
+ *@num: numero a imprimir;
+ *
+ *Return: cantidad de cifras impresas;
+ */
+
+int printINT(int num)
+{
+	int numero;
+	char numeroChar;
+
+	if (num == 0)
+	{
+		return (0);
+	}
+
+	numero = printINT(num / 10);
+
+	numeroChar = (num > 0) ? ((num % 10) + '0') : (-(num % 10) + '0');
+
+	_write(numeroChar);
+
+	numero++;
+
+	return (numero);
+}
+
+/**
 *convert_int - cambia de dato int a string;
 *@c: lista de parametros de donde sacar el int;
 *
 *Return: retorna el int como tipo de dato string (char *)
-* -2,147,400,000 a 2,147,400,000
 */
 int convert_int(va_list c)
 {
-	int array[10];
-	int i, cifra, numero, sum = 0, j = 0;
+	int numero = va_arg(c, int);
+	int j = 0;
 
-	numero = va_arg(c, int);
+	if (numero == 0)
+	{
+		_write('0');
+		return (1);
+	}
 
-	cifra = 1000000000;
-
-	array[0] = numero / cifra;
-	for (i = 1; i < 10; i++)
-	{
-		cifra /= 10;
-		array[i] = (numero / cifra) % 10;
-	}
-	if (numero < 0)
-	{
-		_write('-');
-		j++;
-		for (i = 0; i < 10; i++)
-			array[i] *= -1;
-	}
-	for (i = 0; i < 10; i++)
-	{
-		sum += array[i];
-		if (sum != 0 || i == 9)
-		{
-			_write(array[i] + '0');
-			j++;
-		}
-	}
+	j = (numero < 0) ? _write('-'), (printINT(numero)) + 1 : printINT(numero);
 	return (j);
 }
