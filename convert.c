@@ -1,5 +1,6 @@
 #include "main.h"
 #include <limits.h>
+#include <stdarg.h>
 
 /**
  * convert_char - convert character to string
@@ -46,44 +47,31 @@ int convert_string(va_list c)
 */
 int convert_int(va_list c)
 {
-	int numero, temp, contador, i;
-	char *numeroChar;
+	int numero, cifras;
+	int i;
+	i = 0;
+	cifras = 1;
 
 	numero = va_arg(c, int);
-	if (numero == 0)
-	{
-		_write('0');
-		return (1);
-	}
-	if (numero == INT_MIN)
-		temp = -(numero + 1) + 1;
-	else
-		temp = numero < 0 ? -numero : numero;
 
-	contador = numero < 0 ? 1 : 0;
-
-	while (temp != 0)
-	{
-		temp /= 10;
-		contador++;
-	}
-	numeroChar = malloc((contador + 1) * sizeof(char));
-	if (numeroChar == NULL)
-		return (0);
-
-	numeroChar[contador] = '\0';
-	if (numero == INT_MIN)
-		temp = -(numero + 1) + 1;
-	else
-		temp = numero < 0 ? -numero : numero;
 	if (numero < 0)
-		numeroChar[0] = '-';
-	for (i = contador - 1; temp != 0; i--)
 	{
-		numeroChar[i] = (temp % 10 + '0');
-		temp /= 10;
+		_write('-');
+		i++;
+		numero = -numero;
 	}
-	i = _stamp(numeroChar);
-	free(numeroChar);
+	while (cifras <= numero / 10)
+	{
+		cifras *= 10;
+	}
+
+	while (cifras > 0)
+	{
+		_write((numero / cifras) + '0');
+		i++;
+		numero %= cifras;
+		cifras /= 10;
+	}
+
 	return (i);
 }
