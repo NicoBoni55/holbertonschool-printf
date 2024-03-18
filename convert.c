@@ -47,31 +47,34 @@ int convert_string(va_list c)
 */
 int convert_int(va_list c)
 {
-	int numero, cifras;
-	int i;
-	i = 0;
-	cifras = 1;
+	int array[10];
+	int i, cifra, numero, sum = 0, j = 0;
 
 	numero = va_arg(c, int);
 
+	cifra = 1000000000;
+
+	array[0] = numero / cifra;
+	for (i = 1; i < 10; i++)
+	{
+		cifra /= 10;
+		array[i] = (numero / cifra) % 10;
+	}
 	if (numero < 0)
 	{
 		_write('-');
-		i++;
-		numero = -numero;
+		j++;
+		for (i = 0; i < 10; i++)
+			array[i] *= -1;
 	}
-	while (cifras <= numero / 10)
+	for (i = 0; i < 10; i++)
 	{
-		cifras *= 10;
+		sum += array[i];
+		if (sum != 0 || i == 9)
+		{
+			_write(array[i] + '0');
+			j++;
+		}
 	}
-
-	while (cifras > 0)
-	{
-		_write((numero / cifras) + '0');
-		i++;
-		numero %= cifras;
-		cifras /= 10;
-	}
-
-	return (i);
+	return (j);
 }
