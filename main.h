@@ -21,7 +21,7 @@ struct rep_tiposValidos
 typedef struct rep_tiposValidos TtiposValidos;
 
 int (*tipo_valido(char c))(va_list);
-int _stamp(char *s);
+int printINT(int numero);
 int _write(char s);
 
 int convert_char(va_list para);

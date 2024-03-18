@@ -1,22 +1,35 @@
 #include "main.h"
 #include <unistd.h>
-/**
- * _stamp - returns the length of a string and print
- * @s: string
- *
- * Return: lenght of a string
- */
-int _stamp(char *s)
-{
-	int i = 0;
 
-	while (s[i])
+
+/**
+ *printINT - imprime un numero
+ *@num: numero a imprimir;
+ *
+ *Return: cantidad de cifras impresas;
+ */
+
+int printINT(int num)
+{
+	int numero;
+	char numeroChar;
+
+	if (num == 0)
 	{
-		_write(s[i]);
-		i++;
+		return (0);
 	}
-	return (i);
+
+	numero = printINT(num / 10);
+
+	numeroChar = (num > 0) ? ((num % 10) + '0') : (-(num % 10) + '0');
+
+	_write(numeroChar);
+
+	numero++;
+
+	return (numero);
 }
+
 /**
  * _write - writes the character to stdout
  * @s: string

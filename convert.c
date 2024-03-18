@@ -37,33 +37,6 @@ int convert_string(va_list c)
 	return (i);
 }
 
-/**
- *printINT - imprime un numero
- *@num: numero a imprimir;
- *
- *Return: cantidad de cifras impresas;
- */
-
-int printINT(int num)
-{
-	int numero;
-	char numeroChar;
-
-	if (num == 0)
-	{
-		return (0);
-	}
-
-	numero = printINT(num / 10);
-
-	numeroChar = (num > 0) ? ((num % 10) + '0') : (-(num % 10) + '0');
-
-	_write(numeroChar);
-
-	numero++;
-
-	return (numero);
-}
 
 /**
 *convert_int - cambia de dato int a string;
